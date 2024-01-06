@@ -1,11 +1,11 @@
-import { Inter } from 'next/font/google'
 import './globals.css'
+import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: "Mohammad Tarique's Personal PortFolio",
-  description: 'A Responsive portfolio website designed in Next.js, tailwind css & React',
+  title: "Mohammad Tarique's Personal Portfolio Website",
+  description: 'A Responsive Website designed in Next.Js, TailWind CSS & React',
 }
 
 export default function RootLayout({ children }) {
