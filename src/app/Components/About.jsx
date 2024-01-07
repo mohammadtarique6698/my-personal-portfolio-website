@@ -106,7 +106,7 @@ const About = () => {
           <Image src="/my-avatar.png" alt="avatar" width={800} height={800} />
         </motion.div>
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
-          <h1 className="text-6xl text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600 font-bold mb-4">
+          <h1 className="text-6xl text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600 font-bold mb-4">
             About Me
           </h1>
           <p className="text-base lg:text-lg">

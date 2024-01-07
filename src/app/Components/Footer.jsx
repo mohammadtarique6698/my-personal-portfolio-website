@@ -6,14 +6,11 @@ const Footer = () => {
   return (
     <footer className="footer border border-t-[#33353F] border-l-transparent border-r-transparent text-white">
       <div
-        className="container px-12 py-6 flex justify-between"
+        className="container px-12 py-6 flex flex-row justify-between"
         style={{ alignItems: "center" }}
       >
         <span>
-          <Link
-            href={"/"}
-            className="text-2xl md:text-5xl text-white font-semibold"
-          >
+          <Link href={"/"} className="text-white font-semibold">
             <Image
               src="/my-image.png"
               alt="my-avatar"
@@ -24,7 +21,9 @@ const Footer = () => {
             />
           </Link>
         </span>
-        <p className="text-slate-400">Developed By Mohammad Tarique</p>
+        <p className="text-slate-400 text-center">
+          Developed By Mohammad Tarique
+        </p>
         <p className="text-slate-600">All rights reserverd</p>
       </div>
     </footer>
