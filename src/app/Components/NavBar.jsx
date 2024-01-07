@@ -63,6 +63,15 @@ const NavBar = () => {
                 <NavLinks target={ele.target} title={ele.title} />
               </li>
             ))}
+            <a
+              href="https://drive.google.com/drive/folders/1L8AivuRtGg44zg4tVpxW6Np0Ydw99xhV?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="block py-2 pl-3 pr-4 text-[#ADB7BE] sm:text-xl rounded md:p-0 hover:text-white">
+                Certificate Drive
+              </button>
+            </a>
           </ul>
         </div>
       </div>

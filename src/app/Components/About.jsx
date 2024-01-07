@@ -1,7 +1,8 @@
 "use client";
-import React, { useState, useTransition } from "react";
+import React, { useState, useTransition, useRef } from "react";
 import Image from "next/image";
 import TabButtons from "./TabButtons";
+import { motion, useInView } from "framer-motion";
 
 const TabData = [
   {
@@ -77,22 +78,33 @@ const About = () => {
   const [tab, setTab] = useState("Skills");
   const [isPending, startTransition] = useTransition();
 
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   const handleTabChange = (params) => {
     startTransition(() => {
       setTab(params);
     });
   };
 
+  const avatarVariants = {
+    initial: { x: 50, opacity: 0 },
+    animate: { x: 0, opacity: 1 },
+  };
+
   return (
     <section id="about" className="text-white">
       <div className="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16 mb-4">
         {/* width of the circle is given as w-250 and h-250 if we either increase h or w it will become oval */}
-        <Image
-          src="/my-avatar.png"
-          alt="avatar"
-          width={800}
-          height={800}
-        />
+        <motion.div
+          variants={avatarVariants}
+          initial="initial"
+          animate={isInView ? "animate" : "initial"}
+          transition={{ duration: 1 }}
+          ref={ref}
+        >
+          <Image src="/my-avatar.png" alt="avatar" width={800} height={800} />
+        </motion.div>
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h1 className="text-6xl text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600 font-bold mb-4">
             About Me

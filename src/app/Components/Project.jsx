@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ProjectCard from "./ProjectCard";
 import ProjectTags from "./ProjectTags";
 import { TypeAnimation } from "react-type-animation";
+import { motion, useInView } from "framer-motion";
 
 const ProjectData = [
   {
@@ -66,8 +67,16 @@ const ProjectData = [
 const Project = () => {
   const [tag, setTag] = useState("All");
 
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   const handleTagChange = (newTag) => {
     setTag(newTag);
+  };
+
+  const cardVariants = {
+    initial: { y: 50, opacity: 0 },
+    animate: { y: 0, opacity: 1 },
   };
 
   const filterProjects = ProjectData.filter((ele) => ele.tag.includes(tag));
@@ -107,17 +116,24 @@ const Project = () => {
           active={tag === "Mobile"}
         />
       </div>
-      <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-        {filterProjects.map((ele) => (
-          <ProjectCard
-            key={ele.id}
-            imageUrl={ele.imageURl}
-            title={ele.title}
-            description={ele.description}
-            previewURL={ele.previewURL}
-          />
+      <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
+        {filterProjects.map((ele, index) => (
+          <motion.li
+            key={index}
+            variants={cardVariants}
+            initial="initial"
+            animate={isInView ? "animate" : "initial"}
+            transition={{ duration: 0.5, delay: index * 0.3 }}
+          >
+            <ProjectCard
+              imageUrl={ele.imageURl}
+              title={ele.title}
+              description={ele.description}
+              previewURL={ele.previewURL}
+            />
+          </motion.li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
