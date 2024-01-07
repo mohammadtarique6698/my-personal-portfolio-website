@@ -75,7 +75,12 @@ const NavBar = () => {
           </ul>
         </div>
       </div>
-      {sideBarOpen ? <MenuOverlay links={nL} /> : null}
+      {sideBarOpen ? (
+        <MenuOverlay
+          links={nL}
+          href="https://drive.google.com/drive/folders/1L8AivuRtGg44zg4tVpxW6Np0Ydw99xhV?usp=sharing"
+        />
+      ) : null}
     </nav>
   );
 };
