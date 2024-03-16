@@ -5,7 +5,7 @@ import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 
 const ResumeLink = {
-  link: `https://drive.google.com/file/d/1mO4p8SvE60HPP6aKa9B2pxiNCQE_SG_P/view?usp=sharing`,
+  link: `https://drive.google.com/file/d/1etf28zQPjpEc_bG2O5c3cqvhNpwTvkv1/view?usp=sharing`,
 };
 
 const HeroSection = () => {
@@ -45,9 +45,11 @@ const HeroSection = () => {
             of creativity and technical expertise.
           </p>
           <div>
-            <button className="rounded-full text-lg px-6 py-3 mr-3 bg-white hover:bg-slate-200 text-black mb-3 w-full sm:w-fit">
-              Hire Me
-            </button>
+            <a href="mailto:mohammadtarique661998@gmail.com?subject=Regarding%20Job%20Opportunity">
+              <button className="rounded-full text-lg px-6 py-3 mr-3 bg-white hover:bg-slate-200 text-black mb-3 w-full sm:w-fit">
+                Hire Me
+              </button>
+            </a>
             <a href={ResumeLink.link} target="_blank" rel="noopener noreferrer">
               <button className="bg-white rounded-full text-lg px-6 py-3 bg-transparent hover:bg-slate-800 text-black hover:text-white border border-white w-full sm:w-fit">
                 Download My CV
