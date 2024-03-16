@@ -63,10 +63,15 @@ const TabData = [
         <h1 className="text-xl font-bold">DOJ: 14th April 2022 to Present</h1>
         <ol className="mt-2 pl-2" style={{ listStyleType: "disc" }}>
           <li>Working under CIS domain in CISSURE unit as DB Administrator.</li>
-          <li>Created React based VM Monitoring and management web app.</li>
           <li>
-            Manage and maintain SQL databases for multiple clients, monitors and
-            optimizes database performance for optimal efficiency.
+            Worked on a Monitoring Project focused on resolving tickets,
+            analyzing and prioritizing incoming tickets, troubleshooting issues,
+            and implementing solutions.
+          </li>
+          <li>
+            Some important features of the project include real-time monitoring,
+            automated ticketing system, logging and reporting functionalities,
+            and a user-friendly interface for efficient ticket management.
           </li>
         </ol>
       </div>
