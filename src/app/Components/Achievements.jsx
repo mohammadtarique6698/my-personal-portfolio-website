@@ -3,10 +3,14 @@ import React from "react";
 const achievements = [
   {
     title:
+      "Insta RISE Award: Recognized by the Team Manager for best contributions to work",
+  },
+  {
+    title:
       "Secured 9 out of 12 badges on GeekTrust platform. Achieved Gold Membership",
   },
   {
-    title: "Currently on top 5% in Infosys. (DQ: 85 pts)",
+    title: "Currently on top 1% in Infosys. (DQ: 100 pts)",
   },
 ];
 

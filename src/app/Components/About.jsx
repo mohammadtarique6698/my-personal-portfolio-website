@@ -39,17 +39,14 @@ const TabData = [
     params: "Certifications",
     content: (
       <ol className="pl-2" style={{ listStyleType: "disc" }}>
+        <li>Microsoft Certified Azure Fundamentals</li>
+        <li>Microsoft Certified Power Platform Fundamentals</li>
+        <li>Microsft 365 Certified Fundamentals</li>
+        <li>Microsoft Certified Power Platform Developer Associate</li>
         <li>Infosys Certified Front End Developer</li>
         <li>Infosys Certified React Professional</li>
-        <li>Infosys Certified React Associate</li>
-        <li>Infosys Certified React Web Developer</li>
-        <li>Infosys Certified Node Developer</li>
-        <li>Infosys Certified JavaScript Developer</li>
-        <li>Infosys Certified Python Developer</li>
-        <li>Infosys Certified Generative Ai Professional - Foundation</li>
+        <li>Infosys Certified JavaScript Programmer</li>
         <li>Infosys Certified Professional - Generative AI for All</li>
-        <li>Infosys Certified Cloud Begineer</li>
-        <li>Infosys Certified Global Agile Developer</li>
       </ol>
     ),
   },
@@ -61,19 +58,31 @@ const TabData = [
         <h1 className="text-xl font-bold">Company: Infosys</h1>
         <h1 className="text-xl font-bold">Designation: Systems Engineer</h1>
         <h1 className="text-xl font-bold">DOJ: 14th April 2022 to Present</h1>
-        <ol className="mt-2 pl-2" style={{ listStyleType: "disc" }}>
-          <li>Working under CIS domain in CISSURE unit as DB Administrator.</li>
-          <li>
-            Worked on a Monitoring Project focused on resolving tickets,
-            analyzing and prioritizing incoming tickets, troubleshooting issues,
-            and implementing solutions.
-          </li>
-          <li>
-            Some important features of the project include real-time monitoring,
-            automated ticketing system, logging and reporting functionalities,
-            and a user-friendly interface for efficient ticket management.
-          </li>
-        </ol>
+        <div className="mt-2 pl-2">
+          <p className="font-semibold">
+            In CISSURE - (October 2022 - March 2024)
+          </p>
+          <ul style={{ listStyleType: "disc" }}>
+            <li>Resolved 60 tickets per month (on average).</li>
+            <li>Achieved a 20% reduction in ticket resolution time.</li>
+            <li>
+              Maintained a 95% ticket closure rate within SLA (Service Level
+              Agreement) timeframes.
+            </li>
+            <li>
+              Developed logging and reporting functionalities that improved
+              incident tracking accuracy by 40%.
+            </li>
+            <li>
+              Reduced the average time users spend on ticket management by 20%.
+            </li>
+          </ul>
+          <p className="font-semibold">In MSPTW - (April 2024 - Present)</p>
+          <ul style={{ listStyleType: "disc" }}>
+            <li>Completed Microsoft certifications.</li>
+            <li>Currently learning about SharePoint and Power Automate.</li>
+          </ul>
+        </div>
       </div>
     ),
   },
@@ -144,7 +153,7 @@ const About = () => {
               active={tab === "Certifications"}
             >
               {" "}
-              Certifications{" "}
+              Certifications (Internal & External){" "}
             </TabButtons>
             <TabButtons
               selectTab={() => handleTabChange("Experience")}

@@ -62,6 +62,33 @@ const ProjectData = [
     tag: ["All", "Web", "Mobile"],
     previewURL: "https://tarique-crio-feed-news.netlify.app/",
   },
+  {
+    id: 7,
+    imageURl: "/images/projects-image/p6.png",
+    title: "Full-Stack MERN Food Ordering Platform",
+    description:
+      "A comprehensive food ordering application featuring React, Axios, Bootstrap, MongoDB, and Express, offering secure user authentication, real-time notifications, and a seamless ordering experience.",
+    tag: ["All", "Web", "Mobile"],
+    previewURL: "https://github.com/mohammadtarique6698/Food-App-MERN",
+  },
+  {
+    id: 8,
+    imageURl: "/images/projects-image/p7.png",
+    title: "Horse Booking System",
+    description:
+      " user-friendly horse booking system built with React, Vite, Redux, and a suite of tools like notistack and react-datepicker, ensuring smooth scheduling and seamless navigation.",
+    tag: ["All", "Web", "Mobile"],
+    previewURL: "https://horse-booking-website.vercel.app/",
+  },
+  {
+    id: 9,
+    imageURl: "/images/projects-image/p8.png",
+    title: "Real-Time Weather and AQI Updates",
+    description:
+      "The Weather Dashboard, is an innovative application that provides real-time weather updates and Air Quality Index (AQI) data for various locations. Featuring user authentication, a responsive design, and integration with Google OAuth and RapidAPI services, the application prioritizes accuracy, reliability, and user convenience. This tool empowers users to make informed decisions about their activities and plans based on the latest weather and air quality information.",
+    tag: ["All", "Web", "Mobile"],
+    previewURL: "https://weather-project-psi-five.vercel.app/",
+  },
 ];
 
 const Project = () => {
