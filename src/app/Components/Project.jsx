@@ -17,6 +17,33 @@ const ProjectData = [
   },
   {
     id: 2,
+    imageURl: "/images/projects-image/p8.png",
+    title: "Real-Time Weather and AQI Updates",
+    description:
+      "The Weather Dashboard, is an innovative application that provides real-time weather updates and Air Quality Index (AQI) data for various locations. Featuring user authentication, a responsive design, and integration with Google OAuth and RapidAPI services, the application prioritizes accuracy, reliability, and user convenience. This tool empowers users to make informed decisions about their activities and plans based on the latest weather and air quality information.",
+    tag: ["All", "Web", "Mobile"],
+    previewURL: "https://weather-project-psi-five.vercel.app/",
+  },
+  {
+    id: 3,
+    imageURl: "/images/projects-image/p7.png",
+    title: "Horse Booking System",
+    description:
+      " user-friendly horse booking system built with React, Vite, Redux, and a suite of tools like notistack and react-datepicker, ensuring smooth scheduling and seamless navigation.",
+    tag: ["All", "Web", "Mobile"],
+    previewURL: "https://horse-booking-website.vercel.app/",
+  },
+  {
+    id: 4,
+    imageURl: "/images/projects-image/p6.png",
+    title: "Full-Stack MERN Food Ordering Platform",
+    description:
+      "A comprehensive food ordering application featuring React, Axios, Bootstrap, MongoDB, and Express, offering secure user authentication, real-time notifications, and a seamless ordering experience.",
+    tag: ["All", "Web", "Mobile"],
+    previewURL: "https://github.com/mohammadtarique6698/Food-App-MERN",
+  },
+  {
+    id: 5,
     imageURl: "/images/projects-image/p1.png",
     title: "React based Client Portfolio Website",
     description:
@@ -25,7 +52,16 @@ const ProjectData = [
     previewURL: "https://law-firm-by-tarique.netlify.app/",
   },
   {
-    id: 3,
+    id: 6,
+    imageURl: "/images/projects-image/p3.png",
+    title: "React-CSS based responsive Shopping Cart Web App.",
+    description:
+      "A shopping cart web app made by React and CSS, consists of features like filtering options, item addition and displaying total cart amount details.",
+    tag: ["All", "Web", "Mobile"],
+    previewURL: "https://geektrust-tee-rex-tarique.netlify.app/",
+  },
+  {
+    id: 7,
     imageURl: "/images/projects-image/p2.png",
     title:
       "A React based responsive clone of E-Commerce Shopping Web Application",
@@ -35,16 +71,7 @@ const ProjectData = [
     previewURL: "https://qkart-tarique.netlify.app/",
   },
   {
-    id: 4,
-    imageURl: "/images/projects-image/p3.png",
-    title: "React-CSS based responsive Shopping Cart Web App.",
-    description:
-      "A shopping cart web app made by React and CSS, consists of features like filtering options, item addition and displaying total cart amount details.",
-    tag: ["All", "Web", "Mobile"],
-    previewURL: "https://geektrust-tee-rex-tarique.netlify.app/",
-  },
-  {
-    id: 5,
+    id: 8,
     imageURl: "/images/projects-image/p4.png",
     title:
       "Vanilla JavaScript based responsive clone of E-Commerce Trip Booking Web Application",
@@ -54,40 +81,13 @@ const ProjectData = [
     previewURL: "https://tariqueqtripdynamicpage.netlify.app/",
   },
   {
-    id: 6,
+    id: 9,
     imageURl: "/images/projects-image/p5.png",
     title: "Vanilla JavaScript based a responsive News Feed Web Application",
     description:
       "A  web page designed with vanilla JavaScript magic. The seamless blend of Bootstrap's accordion and carousel ensures a dynamic, user-friendly experience",
     tag: ["All", "Web", "Mobile"],
     previewURL: "https://tarique-crio-feed-news.netlify.app/",
-  },
-  {
-    id: 7,
-    imageURl: "/images/projects-image/p6.png",
-    title: "Full-Stack MERN Food Ordering Platform",
-    description:
-      "A comprehensive food ordering application featuring React, Axios, Bootstrap, MongoDB, and Express, offering secure user authentication, real-time notifications, and a seamless ordering experience.",
-    tag: ["All", "Web", "Mobile"],
-    previewURL: "https://github.com/mohammadtarique6698/Food-App-MERN",
-  },
-  {
-    id: 8,
-    imageURl: "/images/projects-image/p7.png",
-    title: "Horse Booking System",
-    description:
-      " user-friendly horse booking system built with React, Vite, Redux, and a suite of tools like notistack and react-datepicker, ensuring smooth scheduling and seamless navigation.",
-    tag: ["All", "Web", "Mobile"],
-    previewURL: "https://horse-booking-website.vercel.app/",
-  },
-  {
-    id: 9,
-    imageURl: "/images/projects-image/p8.png",
-    title: "Real-Time Weather and AQI Updates",
-    description:
-      "The Weather Dashboard, is an innovative application that provides real-time weather updates and Air Quality Index (AQI) data for various locations. Featuring user authentication, a responsive design, and integration with Google OAuth and RapidAPI services, the application prioritizes accuracy, reliability, and user convenience. This tool empowers users to make informed decisions about their activities and plans based on the latest weather and air quality information.",
-    tag: ["All", "Web", "Mobile"],
-    previewURL: "https://weather-project-psi-five.vercel.app/",
   },
 ];
 
