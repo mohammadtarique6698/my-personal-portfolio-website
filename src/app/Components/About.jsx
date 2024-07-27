@@ -62,7 +62,7 @@ const TabData = [
           <p className="font-semibold">
             In CISSURE - (October 2022 - March 2024)
           </p>
-          <ul style={{ listStyleType: "disc" }}>
+          <ul className="mb-2" style={{ listStyleType: "disc" }}>
             <li>Resolved 60 tickets per month (on average).</li>
             <li>Achieved a 20% reduction in ticket resolution time.</li>
             <li>
@@ -77,8 +77,9 @@ const TabData = [
               Reduced the average time users spend on ticket management by 20%.
             </li>
           </ul>
+          <hr />
           <p className="font-semibold">In MSPTW - (April 2024 - Present)</p>
-          <ul style={{ listStyleType: "disc" }}>
+          <ul className="mt-2" style={{ listStyleType: "disc" }}>
             <li>Completed Microsoft certifications.</li>
             <li>Currently learning about SharePoint and Power Automate.</li>
           </ul>
