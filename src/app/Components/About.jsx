@@ -78,7 +78,7 @@ const TabData = [
             </li>
           </ul>
           <hr />
-          <p className="font-semibold mt-2">
+          <p className="font-semibold my-2">
             In MSPTW - (April 2024 - Present)
           </p>
           <ul style={{ listStyleType: "disc" }}>
