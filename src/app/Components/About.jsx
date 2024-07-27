@@ -78,8 +78,10 @@ const TabData = [
             </li>
           </ul>
           <hr />
-          <p className="font-semibold">In MSPTW - (April 2024 - Present)</p>
-          <ul className="mt-2" style={{ listStyleType: "disc" }}>
+          <p className="font-semibold mt-2">
+            In MSPTW - (April 2024 - Present)
+          </p>
+          <ul style={{ listStyleType: "disc" }}>
             <li>Completed Microsoft certifications.</li>
             <li>Currently learning about SharePoint and Power Automate.</li>
           </ul>
