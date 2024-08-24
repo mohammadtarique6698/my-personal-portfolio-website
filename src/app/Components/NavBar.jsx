@@ -64,7 +64,7 @@ const NavBar = () => {
               </li>
             ))}
             <a
-              href="https://drive.google.com/file/d/1TLFPVzDd-eMxhKH4C1p3RLIduCiZMsOv/view?usp=sharing"
+              href="https://drive.google.com/file/d/1PVrJiEdqQnq7KkjJW6a43HMtU_scp5CG/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -78,7 +78,7 @@ const NavBar = () => {
       {sideBarOpen ? (
         <MenuOverlay
           links={nL}
-          href="https://drive.google.com/file/d/1TLFPVzDd-eMxhKH4C1p3RLIduCiZMsOv/view?usp=sharing"
+          href="https://drive.google.com/file/d/1PVrJiEdqQnq7KkjJW6a43HMtU_scp5CG/view?usp=sharing"
         />
       ) : null}
     </nav>
