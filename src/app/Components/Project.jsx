@@ -9,14 +9,23 @@ const ProjectData = [
   {
     id: 1,
     imageURl: "/images/projects-image/p0.png",
-    title: "React-NextJs based Responsive Portfolio Website",
+    title: "React-Vite-Tailwind based Earthquake Analyser Website",
     description:
-      "Welcome to Tarique's Creative Hub!. I am Mohammad Tarique a dedicated Systems Engineer and passionate Frontend Developer specialized in React.Js, Javascript, HTML, CSS. Step into my digital world. Explore a showcase of my diverse projects spanning from Vanilla JavaScript to React.Js. I believe in the power of collaboration and invite you to connect. Let's work together and build something amazing!",
+      "A React Vite-based responsive seismic data visualization application that uses Chart.js to create interactive line charts and Leaflet to map locations. It is styled using Tailwind CSS and has features like as magnitude filtering, data sorting, and comprehensive trends based on location click. Tools such as React Icons and React Charts improve functionality and user experience.",
     tag: ["All", "Web", "Mobile"],
     previewURL: "/",
   },
   {
     id: 2,
+    imageURl: "/images/projects-image/p9.png",
+    title: "React-NextJs based EV-Vehicle Analyser Website",
+    description:
+      "A responsive website built with React and Next.js application leveraging Tailwind CSS, react-charts, Chart.js, and PapaParse for processing and visualizing large CSV datasets with 50,001 rows. It features efficient CSV parsing and provides interactive charts for in-depth data analysis.",
+    tag: ["All", "Web", "Mobile"],
+    previewURL: "/",
+  },
+  {
+    id: 3,
     imageURl: "/images/projects-image/p8.png",
     title: "Real-Time Weather and AQI Updates",
     description:
@@ -25,7 +34,7 @@ const ProjectData = [
     previewURL: "https://weather-project-psi-five.vercel.app/",
   },
   {
-    id: 3,
+    id: 4,
     imageURl: "/images/projects-image/p7.png",
     title: "Horse Booking System",
     description:
@@ -34,7 +43,7 @@ const ProjectData = [
     previewURL: "https://horse-booking-website.vercel.app/",
   },
   {
-    id: 4,
+    id: 5,
     imageURl: "/images/projects-image/p6.png",
     title: "Full-Stack MERN Food Ordering Platform",
     description:
@@ -43,7 +52,7 @@ const ProjectData = [
     previewURL: "https://github.com/mohammadtarique6698/Food-App-MERN",
   },
   {
-    id: 5,
+    id: 6,
     imageURl: "/images/projects-image/p1.png",
     title: "React based Client Portfolio Website",
     description:
@@ -52,7 +61,7 @@ const ProjectData = [
     previewURL: "https://law-firm-by-tarique.netlify.app/",
   },
   {
-    id: 6,
+    id: 7,
     imageURl: "/images/projects-image/p3.png",
     title: "React-CSS based responsive Shopping Cart Web App.",
     description:
@@ -61,7 +70,7 @@ const ProjectData = [
     previewURL: "https://geektrust-tee-rex-tarique.netlify.app/",
   },
   {
-    id: 7,
+    id: 8,
     imageURl: "/images/projects-image/p2.png",
     title:
       "A React based responsive clone of E-Commerce Shopping Web Application",
@@ -71,7 +80,7 @@ const ProjectData = [
     previewURL: "https://qkart-tarique.netlify.app/",
   },
   {
-    id: 8,
+    id: 9,
     imageURl: "/images/projects-image/p4.png",
     title:
       "Vanilla JavaScript based responsive clone of E-Commerce Trip Booking Web Application",
@@ -81,7 +90,7 @@ const ProjectData = [
     previewURL: "https://tariqueqtripdynamicpage.netlify.app/",
   },
   {
-    id: 9,
+    id: 10,
     imageURl: "/images/projects-image/p5.png",
     title: "Vanilla JavaScript based a responsive News Feed Web Application",
     description:
