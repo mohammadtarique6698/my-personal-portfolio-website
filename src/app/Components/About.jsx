@@ -59,9 +59,9 @@ const TabData = [
         <h1 className="text-xl font-bold">Designation: Systems Engineer</h1>
         <h1 className="text-xl font-bold">DOJ: 14th April 2022 to Present</h1>
         <div className="mt-2 pl-2">
-          <p className="font-semibold">
+{/*           <p className="font-semibold">
             In CISSURE - (October 2022 - March 2024)
-          </p>
+          </p> */}
           <ul className="mb-2" style={{ listStyleType: "disc" }}>
             <li>As a Frontend Developer with 2 years of experience, I developed a Real-Time Analytics Dashboard using
               React.js, UseContext, Chart.js, and Notistack, ensuring seamless data visualization and real-time notifications.
@@ -83,14 +83,14 @@ const TabData = [
               Microsoft Exchange (via Exchange Admin Center), Teams (via Teams Admin Center), Outlook, and productivity tools like Miro.
             </li>
           </ul>
-          <hr />
+{/*           <hr />
           <p className="font-semibold my-2">
             In MSPTW - (April 2024 - Present)
           </p>
           <ul style={{ listStyleType: "disc" }}>
             <li>Completed Microsoft certifications.</li>
             <li>Currently learning about M365 Technologies and aligning myself with latest frontend technologies like Next.js etc.</li>
-          </ul>
+          </ul> */}
         </div>
       </div>
     ),
