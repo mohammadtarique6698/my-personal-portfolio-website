@@ -5,7 +5,7 @@ import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 
 const ResumeLink = {
-  link: "https://drive.google.com/file/d/1LKa16TZhsuQcDyBj92jjr4hC_IwX6Fo8/view?usp=drive_link",
+  link: "https://drive.google.com/file/d/1J5KI--kDtH4miRixqlIv8o4t66oqJ_G4/view?usp=sharing",
 };
 
 const HeroSection = () => {
