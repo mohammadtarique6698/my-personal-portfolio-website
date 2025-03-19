@@ -63,18 +63,24 @@ const TabData = [
             In CISSURE - (October 2022 - March 2024)
           </p>
           <ul className="mb-2" style={{ listStyleType: "disc" }}>
-            <li>Resolved 60 tickets per month (on average).</li>
-            <li>Achieved a 20% reduction in ticket resolution time.</li>
-            <li>
-              Maintained a 95% ticket closure rate within SLA (Service Level
-              Agreement) timeframes.
+            <li>As a Frontend Developer with 2 years of experience, I developed a Real-Time Analytics Dashboard using
+              React.js, UseContext, Chart.js, and Notistack, ensuring seamless data visualization and real-time notifications.
+            </li>
+            <li>I collaborated with my team to optimize the UI/UX of a Monitoring System using Tailwind CSS, Grid/Flexbox,
+              and lazy loading techniques, improving performance and responsiveness.
             </li>
             <li>
-              Developed logging and reporting functionalities that improved
-              incident tracking accuracy by 40%.
+              I worked collaboratively with my team to implement debouncing, optimizing API request frequency to reduce
+              unnecessary calls and improve performance.
             </li>
             <li>
-              Reduced the average time users spend on ticket management by 20%.
+              I enhanced user interaction by implementing smooth animations and transitions using Framer Motion, Swiper.js
+              in an acclerate project.
+            </li>
+            <li>
+              Currently as an M365 Administrator, I support a project that resolves issues and requests across Microsoft
+              365 services, including SharePoint (via SharePoint Admin Center), OneDrive for Business (via Microsoft Admin Center), 
+              Microsoft Exchange (via Exchange Admin Center), Teams (via Teams Admin Center), Outlook, and productivity tools like Miro.
             </li>
           </ul>
           <hr />
@@ -83,7 +89,7 @@ const TabData = [
           </p>
           <ul style={{ listStyleType: "disc" }}>
             <li>Completed Microsoft certifications.</li>
-            <li>Currently learning about SharePoint and Power Automate.</li>
+            <li>Currently learning about M365 Technologies and aligning myself with latest frontend technologies like Next.js etc.</li>
           </ul>
         </div>
       </div>
