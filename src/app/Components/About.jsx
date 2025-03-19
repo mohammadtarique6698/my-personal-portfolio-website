@@ -11,14 +11,15 @@ const TabData = [
     content: (
       <ol className="pl-2" style={{ listStyleType: "disc" }}>
         <li>React.JS (Primary)</li>
+        <li>Next.js</li>
         <li>JavaScript</li>
         <li>RESTful APIs</li>
         <li>HTML</li>
         <li>CSS</li>
         <li>Node.JS</li>
-        <li>BootStrap</li>
+        <li>Tailwind CSS</li>
         <li>Material UI</li>
-        <li>Linux</li>
+        <li>M365 Administrator</li>
         <li>Python (Pandas, NumPy, Matplotlib)</li>
       </ol>
     ),
