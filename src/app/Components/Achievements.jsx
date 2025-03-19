@@ -10,7 +10,7 @@ const achievements = [
       "Secured 9 out of 12 badges on GeekTrust platform. Achieved Gold Membership",
   },
   {
-    title: "Currently on top 1% in Infosys. (DQ: 100 pts)",
+    title: "Currently on top 1% in Infosys. (DQ: 130 pts)",
   },
 ];
 
