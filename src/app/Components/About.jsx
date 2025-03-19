@@ -13,10 +13,10 @@ const TabData = [
         <li>React.JS (Primary)</li>
         <li>Next.js</li>
         <li>JavaScript</li>
-        <li>RESTful APIs</li>
-        <li>HTML</li>
-        <li>CSS</li>
         <li>Node.JS</li>
+        <li>RESTful APIs</li>
+        <li>HTML, CSS</li>
+        <li>SQL</li>
         <li>Tailwind CSS</li>
         <li>Material UI</li>
         <li>M365 Administrator</li>
