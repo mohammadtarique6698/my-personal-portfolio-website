@@ -10,7 +10,7 @@ const ResumeLink = {
 
 const HeroSection = () => {
   return (
-    <section className="lg:py-6">
+    <section className="lg:py-8">
       <div className="grid grid-cols-1 lg:grid-cols-12">
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
