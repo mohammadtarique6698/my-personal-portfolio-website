@@ -61,7 +61,7 @@ const HeroSection = () => {
             crafting seamless user interfaces. Passionate about delivering
             visually appealing and user-friendly solutions through a combination
             of creativity and technical expertise. */}
-            M365 Administrator with strong experience in Power Platform, Power Automate, and Power BI, delivering efficient and scalable business solutions across the Microsoft 365 ecosystem. Alongside this, I bring hands-on frontend development experience in React.js, building intuitive and responsive user interfaces, with a growing focus on integrating AI-powered features into modern web solutions.
+            M365 Administrator with strong experience in Power Platform, Power Automate, and Power BI, delivering efficient and scalable business solutions across the Microsoft 365 ecosystem. Alongside this, I bring hands-on frontend development experience in React.js, building intuitive and responsive user interfaces, with a growing focus on integrating AI-powered features into modern web solutions. I enjoy working across both platforms and frontend layers, bridging business requirements with reliable, user-centric technical solutions.
           </p>
           <div>
             <a href="mailto:mohammadtarique661998@gmail.com?subject=Regarding%20Job%20Opportunity">
