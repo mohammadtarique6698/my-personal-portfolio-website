@@ -134,7 +134,7 @@ const Project = () => {
   const filterProjects = ProjectData.filter((ele) => ele.tag.includes(tag));
   return (
     <div id="project">
-      <h2 className="mb-6 text-5xl font-semibold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600">
+      <h2 className="mb-6 text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600">
         <TypeAnimation
           sequence={[
             // Same substring at the start will only be typed out once, initially
