@@ -6,11 +6,11 @@ const Footer = () => {
   return (
     <footer className="footer border border-t-[#33353F] border-l-transparent border-r-transparent text-white">
       <div
-        className="container flex flex-row justify-between px-12 py-6"
+        className="flex flex-row justify-between gap-4 px-12 py-6"
         style={{ alignItems: "center" }}
       >
         <span>
-          <Link href={"/"} className="font-semibold text-white">
+          <Link href={"/"} className="font-semibold text-white text-start">
             <Image
               src="/my-image.png"
               alt="my-avatar"
@@ -24,7 +24,7 @@ const Footer = () => {
         <p className="text-center text-slate-400">
           Developed By <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500">Mohammad Tarique</span> <span className="text-sm text-slate-400">© {new Date().getFullYear()}{" "}</span>
         </p>
-        <p className="text-slate-600">All rights reserverd</p>
+        <p className="text-right text-slate-600">All rights reserverd</p>
       </div>
     </footer>
   );

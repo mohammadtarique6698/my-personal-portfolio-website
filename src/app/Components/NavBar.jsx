@@ -18,7 +18,7 @@ const NavBar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-20 mx-auto border border-[#33353F] bg-[#121212] bg-opacity-80">
-      <div className="container flex flex-wrap items-center justify-between py-2 pt-4 mx-auto px-11 lg:py-4">
+      <div className="container flex flex-wrap items-center justify-between px-10 py-2 pt-4 mx-auto lg:py-4">
         <Link href="/" className="text-2xl font-semibold text-white md:text-5xl">
           <Image
             src="/my-image.png"
