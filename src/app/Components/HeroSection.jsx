@@ -11,7 +11,7 @@ const ResumeLink = {
 const HeroSection = () => {
   return (
     <section className="py-8 lg:py-12">
-      <div className="grid grid-cols-1 gap-6 pl-6 lg:grid-cols-12 lg:gap-4">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-4">
 
         {/* TEXT CONTENT */}
         <motion.div
@@ -21,7 +21,7 @@ const HeroSection = () => {
           className="flex flex-col items-center text-left lg:col-span-6 lg:items-start"
         >
           <h1 className="mb-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600">
+            <span className="block text-left text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600">
               Hello, I’m Tarique
             </span>
 
@@ -34,7 +34,7 @@ const HeroSection = () => {
                 "A Passionate Coder, Tech Enthusiast, and AI Enthusiast",
                 2000,
               ]}
-              wrapper="span"
+              wrapper="div"
               speed={50}
               className="block mt-3 text-base text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-600 sm:text-lg lg:text-xl"
               repeat={Infinity}
