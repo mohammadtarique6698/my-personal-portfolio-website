@@ -38,7 +38,7 @@ const About = () => {
           initial="initial"
           animate={isInView ? "animate" : "initial"}
           transition={{ duration: 1 }}
-          className="flex justify-center w-full h-full lg:justify-start"
+          className="flex items-center justify-center w-full h-full lg:justify-start"
         >
           <Image
             src="/my-avatar.png"
