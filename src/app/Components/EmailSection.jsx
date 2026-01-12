@@ -18,21 +18,35 @@ const EmailSection = () => {
       message: e.target.message.value,
     };
 
+    // Absolute URL fixes mobile Safari issues
+    const apiUrl =
+      typeof window !== "undefined"
+        ? `${window.location.origin}/api/send`
+        : "/api/send";
+
     try {
-      const response = await fetch("/api/send", {
+      const response = await fetch(apiUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) throw new Error();
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data?.error || "Failed to send");
+      }
 
       enqueueSnackbar("Message sent successfully!", {
         variant: "success",
       });
 
       e.target.reset();
-    } catch {
+    } catch (error) {
+      console.error("Send failed:", error);
       enqueueSnackbar("Failed to send message. Please try again.", {
         variant: "error",
       });
@@ -88,7 +102,6 @@ const EmailSection = () => {
 
       {/* RIGHT – FORM */}
       <div className="relative p-8 border rounded-2xl border-white/10 bg-white/5 backdrop-blur-sm">
-        {/* FORM HEADER */}
         <div className="mb-3">
           <h3 className="text-2xl font-semibold text-white">
             Send me a message
@@ -103,6 +116,9 @@ const EmailSection = () => {
             type="email"
             name="email"
             required
+            autoCapitalize="none"
+            autoCorrect="off"
+            inputMode="email"
             placeholder="Your email"
             className="p-3 rounded-lg bg-[#18191E] border border-[#33353F] focus:outline-none focus:border-purple-500"
           />
@@ -126,6 +142,7 @@ const EmailSection = () => {
           <button
             type="submit"
             disabled={loading}
+            onClick={(e) => e.currentTarget.blur()}
             className="py-3 font-medium transition bg-purple-500 rounded-lg hover:bg-purple-600 disabled:opacity-50"
           >
             {loading ? "Sending..." : "Send Message"}
@@ -137,3 +154,4 @@ const EmailSection = () => {
 };
 
 export default EmailSection;
+
