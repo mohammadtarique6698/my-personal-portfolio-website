@@ -18,23 +18,21 @@ const EmailSection = () => {
       message: e.target.message.value,
     };
 
-    // Absolute URL fixes mobile Safari issues
-    const apiUrl =
-      typeof window !== "undefined"
-        ? `${window.location.origin}/api/send`
-        : "/api/send";
-
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch("/api/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
         },
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      let data = {};
+      try {
+        data = await response.json();
+      } catch {
+        // mobile-safe: response might be empty
+      }
 
       if (!response.ok) {
         throw new Error(data?.error || "Failed to send");
@@ -54,6 +52,43 @@ const EmailSection = () => {
       setLoading(false);
     }
   };
+
+
+  //   const apiUrl =
+  //     typeof window !== "undefined"
+  //       ? `${window.location.origin}/api/send`
+  //       : "/api/send";
+
+  //   try {
+  //     const response = await fetch(apiUrl, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+
+  //     const data = await response.json();
+
+  //     if (!response.ok) {
+  //       throw new Error(data?.error || "Failed to send");
+  //     }
+
+  //     enqueueSnackbar("Message sent successfully!", {
+  //       variant: "success",
+  //     });
+
+  //     e.target.reset();
+  //   } catch (error) {
+  //     console.error("Send failed:", error);
+  //     enqueueSnackbar("Failed to send message. Please try again.", {
+  //       variant: "error",
+  //     });
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <section

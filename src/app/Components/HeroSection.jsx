@@ -11,14 +11,14 @@ const ResumeLink = {
 const HeroSection = () => {
   return (
     <section className="py-8 lg:py-12">
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-4">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-6">
 
         {/* TEXT CONTENT */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col items-center text-left lg:col-span-6 lg:items-start"
+          className="flex flex-col items-center gap-4 lg:col-span-8 lg:items-start"
         >
           <h1 className="mb-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
             <span className="block text-left text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600">
@@ -41,7 +41,7 @@ const HeroSection = () => {
             />
           </h1>
 
-          <p className="max-w-xl mb-6 text-base text-[#ADB7BE] sm:text-lg">
+          <p className="text-left mb-6 text-base text-[#ADB7BE] sm:text-lg lg:pr-8">
             M365 Administrator with strong experience in Power Platform, Power
             Automate, and Power BI, delivering efficient and scalable business
             solutions across the Microsoft 365 ecosystem. Alongside this, I bring
@@ -71,8 +71,8 @@ const HeroSection = () => {
         </motion.div>
 
         {/* AVATAR */}
-        <div className="flex justify-center lg:col-span-6 lg:-ml-6">
-          <div className="relative w-[180px] h-[180px] sm:w-[250px] sm:h-[250px] lg:w-[400px] lg:h-[400px] rounded-full bg-slate-800">
+        <div className="flex justify-center lg:col-span-4 lg:-ml-6">
+          <div className="relative w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] lg:w-[400px] lg:h-[400px] rounded-full bg-slate-800">
             <Image
               src="/avatar.png"
               alt="avatar"
