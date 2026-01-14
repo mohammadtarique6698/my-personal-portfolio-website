@@ -4,9 +4,21 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req) {
   try {
-    const body = await req.json();
+    const contentType = req.headers.get("content-type");
 
-    let { email, subject, message } = body;
+    let email, subject, message;
+
+    if (contentType?.includes("multipart/form-data")) {
+      const formData = await req.formData();
+      email = formData.get("email");
+      subject = formData.get("subject");
+      message = formData.get("message");
+    } else {
+      const body = await req.json();
+      email = body.email;
+      subject = body.subject;
+      message = body.message;
+    }
 
     email = email?.replace(/\s+/g, "").toLowerCase();
     subject = subject?.trim();
@@ -19,24 +31,21 @@ export async function POST(req) {
       );
     }
 
-    const result = await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
       to: [process.env.CONTACT_EMAIL],
       reply_to: email,
-      subject,
+      subject: `Portfolio Contact: ${subject}`,
       html: `
         <p><strong>From:</strong> ${email}</p>
         <p>${message.replace(/\n/g, "<br/>")}</p>
       `,
     });
 
-    if (result.error) {
-      console.error("Resend error:", result.error);
-
+    if (error) {
+      console.error("Resend error:", error);
       return new Response(
-        JSON.stringify({
-          error: result.error.message || "Email service failed",
-        }),
+        JSON.stringify({ error: error.message }),
         { status: 502, headers: { "Content-Type": "application/json" } }
       );
     }
@@ -46,14 +55,71 @@ export async function POST(req) {
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   } catch (err) {
-    console.error("API crash:", err);
-
+    console.error("Server crash:", err);
     return new Response(
       JSON.stringify({ error: "Server error" }),
       { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }
 }
+
+
+// import { Resend } from "resend";
+
+// const resend = new Resend(process.env.RESEND_API_KEY);
+
+// export async function POST(req) {
+//   try {
+//     const body = await req.json();
+
+//     let { email, subject, message } = body;
+
+//     email = email?.replace(/\s+/g, "").toLowerCase();
+//     subject = subject?.trim();
+//     message = message?.trim();
+
+//     if (!email || !subject || !message) {
+//       return new Response(
+//         JSON.stringify({ error: "Missing fields" }),
+//         { status: 400, headers: { "Content-Type": "application/json" } }
+//       );
+//     }
+
+//     const result = await resend.emails.send({
+//       from: "Portfolio Contact <onboarding@resend.dev>",
+//       to: [process.env.CONTACT_EMAIL],
+//       reply_to: email,
+//       subject,
+//       html: `
+//         <p><strong>From:</strong> ${email}</p>
+//         <p>${message.replace(/\n/g, "<br/>")}</p>
+//       `,
+//     });
+
+//     if (result.error) {
+//       console.error("Resend error:", result.error);
+
+//       return new Response(
+//         JSON.stringify({
+//           error: result.error.message || "Email service failed",
+//         }),
+//         { status: 502, headers: { "Content-Type": "application/json" } }
+//       );
+//     }
+
+//     return new Response(
+//       JSON.stringify({ success: true }),
+//       { status: 200, headers: { "Content-Type": "application/json" } }
+//     );
+//   } catch (err) {
+//     console.error("API crash:", err);
+
+//     return new Response(
+//       JSON.stringify({ error: "Server error" }),
+//       { status: 500, headers: { "Content-Type": "application/json" } }
+//     );
+//   }
+// }
 
 
 // import { Resend } from 'resend';

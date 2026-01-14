@@ -9,76 +9,137 @@ const EmailSection = () => {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // Prevent double submit (very important on mobile)
-    if (loading) return;
-    setLoading(true);
+  if (loading) return;
+  setLoading(true);
 
-    // Safely read values (mobile browsers are picky)
-    const form = e.currentTarget;
-    const email = form.email?.value?.trim();
-    const subject = form.subject?.value?.trim();
-    const message = form.message?.value?.trim();
+  const form = e.currentTarget;
 
-    // Client-side validation (fast fail on mobile)
-    if (!email || !subject || !message) {
-      enqueueSnackbar("Please fill in all fields", { variant: "warning" });
-      setLoading(false);
-      return;
-    }
+  const email = form.email?.value?.trim();
+  const subject = form.subject?.value?.trim();
+  const message = form.message?.value?.trim();
 
-    // Mobile network check
-    if (typeof navigator !== "undefined" && !navigator.onLine) {
-      enqueueSnackbar("No internet connection", { variant: "error" });
-      setLoading(false);
-      return;
-    }
+  if (!email || !subject || !message) {
+    enqueueSnackbar("Please fill in all fields", { variant: "warning" });
+    setLoading(false);
+    return;
+  }
 
+  if (typeof navigator !== "undefined" && !navigator.onLine) {
+    enqueueSnackbar("No internet connection", { variant: "error" });
+    setLoading(false);
+    return;
+  }
+
+  // ✅ FormData (mobile-safe)
+  const formData = new FormData();
+  formData.append("email", email);
+  formData.append("subject", subject);
+  formData.append("message", message);
+
+  try {
+    const response = await fetch("/api/send", {
+      method: "POST",
+      body: formData, // ❗ no headers
+    });
+
+    let data = {};
     try {
-      const response = await fetch("/api/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          subject,
-          message,
-        }),
-        cache: "no-store", // mobile-safe
-      });
+      data = await response.json();
+    } catch {}
 
-      // Defensive JSON parsing (Safari/iOS safe)
-      let data = {};
-      try {
-        data = await response.json();
-      } catch {
-        data = {};
-      }
-
-      if (!response.ok) {
-        throw new Error(data?.error || "Failed to send");
-      }
-
-      enqueueSnackbar("Message sent successfully!", {
-        variant: "success",
-      });
-
-      form.reset();
-    } catch (error) {
-      console.error("Send failed:", error);
-
-      enqueueSnackbar(
-        error.name === "AbortError"
-          ? "Request timed out. Try again."
-          : "Failed to send message. Please try again.",
-        { variant: "error" }
-      );
-    } finally {
-      setLoading(false);
+    if (!response.ok) {
+      throw new Error(data?.error || "Failed to send");
     }
-  };
+
+    enqueueSnackbar("Message sent successfully!", {
+      variant: "success",
+    });
+
+    form.reset();
+  } catch (error) {
+    console.error("Send failed:", error);
+    enqueueSnackbar("Failed to send message. Please try again.", {
+      variant: "error",
+    });
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   // Prevent double submit (very important on mobile)
+  //   if (loading) return;
+  //   setLoading(true);
+
+  //   // Safely read values (mobile browsers are picky)
+  //   const form = e.currentTarget;
+  //   const email = form.email?.value?.trim();
+  //   const subject = form.subject?.value?.trim();
+  //   const message = form.message?.value?.trim();
+
+  //   // Client-side validation (fast fail on mobile)
+  //   if (!email || !subject || !message) {
+  //     enqueueSnackbar("Please fill in all fields", { variant: "warning" });
+  //     setLoading(false);
+  //     return;
+  //   }
+
+  //   // Mobile network check
+  //   if (typeof navigator !== "undefined" && !navigator.onLine) {
+  //     enqueueSnackbar("No internet connection", { variant: "error" });
+  //     setLoading(false);
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await fetch("/api/send", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         email,
+  //         subject,
+  //         message,
+  //       }),
+  //       cache: "no-store", // mobile-safe
+  //     });
+
+  //     // Defensive JSON parsing (Safari/iOS safe)
+  //     let data = {};
+  //     try {
+  //       data = await response.json();
+  //     } catch {
+  //       data = {};
+  //     }
+
+  //     if (!response.ok) {
+  //       throw new Error(data?.error || "Failed to send");
+  //     }
+
+  //     enqueueSnackbar("Message sent successfully!", {
+  //       variant: "success",
+  //     });
+
+  //     form.reset();
+  //   } catch (error) {
+  //     console.error("Send failed:", error);
+
+  //     enqueueSnackbar(
+  //       error.name === "AbortError"
+  //         ? "Request timed out. Try again."
+  //         : "Failed to send message. Please try again.",
+  //       { variant: "error" }
+  //     );
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   //   const apiUrl =
   //     typeof window !== "undefined"
