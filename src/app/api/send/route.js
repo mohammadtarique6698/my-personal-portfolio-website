@@ -37,17 +37,28 @@ export async function POST(req) {
     const { error } = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>',
       to: [process.env.CONTACT_EMAIL],
-      // reply_to: {
-      //   email,
-      // },
-      subject,
+      reply_to: email,
+      subject: `Portfolio Contact: ${subject}`,
       html: `
-        <h2>New Message from Portfolio Website</h2>
-        <p><strong>From:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br/>')}</p>
-      `,
+    <p><strong>From:</strong> ${email}</p>
+    <p>${message.replace(/\n/g, '<br/>')}</p>
+  `,
     });
+
+    // const { error } = await resend.emails.send({
+    //   from: 'Portfolio Contact <onboarding@resend.dev>',
+    //   to: [process.env.CONTACT_EMAIL],
+    //   // reply_to: {
+    //   //   email,
+    //   // },
+    //   subject,
+    //   html: `
+    //     <h2>New Message from Portfolio Website</h2>
+    //     <p><strong>From:</strong> ${email}</p>
+    //     <p><strong>Message:</strong></p>
+    //     <p>${message.replace(/\n/g, '<br/>')}</p>
+    //   `,
+    // });
 
     if (error) {
       console.error('Resend error:', error);

@@ -10,13 +10,30 @@ const EmailSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Prevent double submit (very important on mobile)
+    if (loading) return;
     setLoading(true);
 
-    const formData = {
-      email: e.target.email.value,
-      subject: e.target.subject.value,
-      message: e.target.message.value,
-    };
+    // Safely read values (mobile browsers are picky)
+    const form = e.currentTarget;
+    const email = form.email?.value?.trim();
+    const subject = form.subject?.value?.trim();
+    const message = form.message?.value?.trim();
+
+    // Client-side validation (fast fail on mobile)
+    if (!email || !subject || !message) {
+      enqueueSnackbar("Please fill in all fields", { variant: "warning" });
+      setLoading(false);
+      return;
+    }
+
+    // Mobile network check
+    if (typeof navigator !== "undefined" && !navigator.onLine) {
+      enqueueSnackbar("No internet connection", { variant: "error" });
+      setLoading(false);
+      return;
+    }
 
     try {
       const response = await fetch("/api/send", {
@@ -24,14 +41,20 @@ const EmailSection = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          email,
+          subject,
+          message,
+        }),
+        cache: "no-store", // mobile-safe
       });
 
+      // Defensive JSON parsing (Safari/iOS safe)
       let data = {};
       try {
         data = await response.json();
       } catch {
-        // mobile-safe: response might be empty
+        data = {};
       }
 
       if (!response.ok) {
@@ -42,17 +65,20 @@ const EmailSection = () => {
         variant: "success",
       });
 
-      e.target.reset();
+      form.reset();
     } catch (error) {
       console.error("Send failed:", error);
-      enqueueSnackbar("Failed to send message. Please try again.", {
-        variant: "error",
-      });
+
+      enqueueSnackbar(
+        error.name === "AbortError"
+          ? "Request timed out. Try again."
+          : "Failed to send message. Please try again.",
+        { variant: "error" }
+      );
     } finally {
       setLoading(false);
     }
   };
-
 
   //   const apiUrl =
   //     typeof window !== "undefined"
