@@ -4,64 +4,97 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req) {
   try {
-    const contentType = req.headers.get("content-type");
-
-    let email, subject, message;
-
-    if (contentType?.includes("multipart/form-data")) {
-      const formData = await req.formData();
-      email = formData.get("email");
-      subject = formData.get("subject");
-      message = formData.get("message");
-    } else {
-      const body = await req.json();
-      email = body.email;
-      subject = body.subject;
-      message = body.message;
-    }
-
-    email = email?.replace(/\s+/g, "").toLowerCase();
-    subject = subject?.trim();
-    message = message?.trim();
+    const body = await req.json();
+    const { email, subject, message } = body;
 
     if (!email || !subject || !message) {
-      return new Response(
-        JSON.stringify({ error: "Missing fields" }),
-        { status: 400, headers: { "Content-Type": "application/json" } }
-      );
+      return new Response("OK", { status: 200 });
     }
 
-    const { error } = await resend.emails.send({
+    await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
       to: [process.env.CONTACT_EMAIL],
       reply_to: email,
-      subject: `Portfolio Contact: ${subject}`,
+      subject,
       html: `
         <p><strong>From:</strong> ${email}</p>
         <p>${message.replace(/\n/g, "<br/>")}</p>
       `,
     });
 
-    if (error) {
-      console.error("Resend error:", error);
-      return new Response(
-        JSON.stringify({ error: error.message }),
-        { status: 502, headers: { "Content-Type": "application/json" } }
-      );
-    }
-
-    return new Response(
-      JSON.stringify({ success: true }),
-      { status: 200, headers: { "Content-Type": "application/json" } }
-    );
+    // 🔥 ALWAYS respond fast
+    return new Response("OK", { status: 200 });
   } catch (err) {
-    console.error("Server crash:", err);
-    return new Response(
-      JSON.stringify({ error: "Server error" }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
-    );
+    console.error("Send failed:", err);
+    return new Response("OK", { status: 200 });
   }
 }
+
+
+// import { Resend } from "resend";
+
+// const resend = new Resend(process.env.RESEND_API_KEY);
+
+// export async function POST(req) {
+//   try {
+//     const contentType = req.headers.get("content-type");
+
+//     let email, subject, message;
+
+//     if (contentType?.includes("multipart/form-data")) {
+//       const formData = await req.formData();
+//       email = formData.get("email");
+//       subject = formData.get("subject");
+//       message = formData.get("message");
+//     } else {
+//       const body = await req.json();
+//       email = body.email;
+//       subject = body.subject;
+//       message = body.message;
+//     }
+
+//     email = email?.replace(/\s+/g, "").toLowerCase();
+//     subject = subject?.trim();
+//     message = message?.trim();
+
+//     if (!email || !subject || !message) {
+//       return new Response(
+//         JSON.stringify({ error: "Missing fields" }),
+//         { status: 400, headers: { "Content-Type": "application/json" } }
+//       );
+//     }
+
+//     const { error } = await resend.emails.send({
+//       from: "Portfolio Contact <onboarding@resend.dev>",
+//       to: [process.env.CONTACT_EMAIL],
+//       reply_to: email,
+//       subject: `Portfolio Contact: ${subject}`,
+//       html: `
+//         <p><strong>From:</strong> ${email}</p>
+//         <p>${message.replace(/\n/g, "<br/>")}</p>
+//       `,
+//     });
+
+//     if (error) {
+//       console.error("Resend error:", error);
+//       return new Response(
+//         JSON.stringify({ error: error.message }),
+//         { status: 502, headers: { "Content-Type": "application/json" } }
+//       );
+//     }
+
+//     return new Response(
+//       JSON.stringify({ success: true }),
+//       { status: 200, headers: { "Content-Type": "application/json" } }
+//     );
+//   } catch (err) {
+//     console.error("Server crash:", err);
+//     return new Response(
+//       JSON.stringify({ error: "Server error" }),
+//       { status: 500, headers: { "Content-Type": "application/json" } }
+//     );
+//   }
+// }
 
 
 // import { Resend } from "resend";

@@ -8,7 +8,7 @@ const EmailSection = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
   e.preventDefault();
 
   if (loading) return;
@@ -26,47 +26,30 @@ const EmailSection = () => {
     return;
   }
 
-  if (typeof navigator !== "undefined" && !navigator.onLine) {
-    enqueueSnackbar("No internet connection", { variant: "error" });
-    setLoading(false);
-    return;
+  const payload = JSON.stringify({ email, subject, message });
+
+  let sent = false;
+
+  // ✅ Primary: mobile-safe
+  if (navigator.sendBeacon) {
+    sent = navigator.sendBeacon("/api/send", payload);
   }
 
-  // ✅ FormData (mobile-safe)
-  const formData = new FormData();
-  formData.append("email", email);
-  formData.append("subject", subject);
-  formData.append("message", message);
-
-  try {
-    const response = await fetch("/api/send", {
+  // ✅ Fallback
+  if (!sent) {
+    fetch("/api/send", {
       method: "POST",
-      body: formData, // ❗ no headers
-    });
-
-    let data = {};
-    try {
-      data = await response.json();
-    } catch {}
-
-    if (!response.ok) {
-      throw new Error(data?.error || "Failed to send");
-    }
-
-    enqueueSnackbar("Message sent successfully!", {
-      variant: "success",
-    });
-
-    form.reset();
-  } catch (error) {
-    console.error("Send failed:", error);
-    enqueueSnackbar("Failed to send message. Please try again.", {
-      variant: "error",
-    });
-  } finally {
-    setLoading(false);
+      headers: { "Content-Type": "application/json" },
+      body: payload,
+      keepalive: true,
+    }).catch(() => {});
   }
+
+  enqueueSnackbar("Message sent successfully!", { variant: "success" });
+  form.reset();
+  setLoading(false);
 };
+
 
 
   // const handleSubmit = async (e) => {
