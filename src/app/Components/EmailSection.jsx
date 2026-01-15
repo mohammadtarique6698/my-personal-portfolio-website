@@ -40,6 +40,8 @@ const EmailSection = () => {
         }),
       });
 
+      console.log("Formspree response:", res);
+
       if (!res.ok) {
         throw new Error("Formspree failed");
       }
