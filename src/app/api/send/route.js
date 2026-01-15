@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 
 export const runtime = 'nodejs';
-export const maxDuration = 10; // ✅ tell Vercel to allow SMTP time
+export const maxDuration = 1000; // ✅ tell Vercel to allow SMTP time
 
 export async function POST(req) {
   try {
