@@ -22,7 +22,7 @@ const HeroSection = () => {
         >
           <h1 className="mb-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
             <span className="block text-left text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600">
-              Hello, I’m Mohammad Tarique
+              Hello, My name is Mohammad Tarique
             </span>
 
             <TypeAnimation
