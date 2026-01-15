@@ -27,21 +27,21 @@ const EmailSection = () => {
     }
 
     try {
-      const res = await fetch("/api/send", {
+      const res = await fetch("https://formspree.io/f/mreeboan", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify({ email, subject, message }),
+        body: JSON.stringify({
+          email,
+          subject,
+          message,
+        }),
       });
 
-      let data = {};
-      try {
-        data = await res.json();
-      } catch { }
-
       if (!res.ok) {
-        throw new Error(data?.error || "Failed to send message");
+        throw new Error("Formspree failed");
       }
 
       enqueueSnackbar("Message sent successfully!", {
@@ -59,6 +59,7 @@ const EmailSection = () => {
       setLoading(false);
     }
   };
+
 
   //   const apiUrl =
   //     typeof window !== "undefined"
