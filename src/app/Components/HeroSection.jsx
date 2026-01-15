@@ -20,9 +20,9 @@ const HeroSection = () => {
           transition={{ duration: 0.5 }}
           className="flex flex-col items-center gap-4 lg:col-span-8 lg:items-start"
         >
-          <h1 className="mb-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mb-5 text-3xl font-extrabold leading-tight text-white sm:text-5xl lg:text-5xl">
             <span className="block text-left text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600">
-              Hello, This is Mohammad Tarique
+              Hello, My Name is Mohammad Tarique
             </span>
 
             <TypeAnimation

@@ -1,306 +1,86 @@
-import { Resend } from "resend";
+import nodemailer from 'nodemailer';
 
-export const runtime = "nodejs"; // 🔴 REQUIRED for Resend
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+export const runtime = 'nodejs';
 
 export async function POST(req) {
   try {
-    const body = await req.json().catch(() => null);
+    const { email, subject, message } = await req.json();
 
-    if (!body) {
-      return new Response(
-        JSON.stringify({ error: "Invalid JSON body" }),
-        { status: 400 }
-      );
-    }
+    console.log('📩 Incoming mail:', { email, subject });
 
-    let { email, subject, message } = body;
-
-    email = email?.trim().toLowerCase();
-    subject = subject?.trim();
-    message = message?.trim();
-
-    if (!email || !subject || !message) {
-      return new Response(
-        JSON.stringify({ error: "Missing fields" }),
-        { status: 400 }
-      );
-    }
-
-    const { error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>",
-      to: [process.env.CONTACT_EMAIL],
-      replyTo: email, // ✅ correct key
-      subject,
-      html: `
-        <p><strong>From:</strong> ${email}</p>
-        <p>${message.replace(/\n/g, "<br/>")}</p>
-      `,
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+      },
     });
 
-    if (error) {
-      console.error("Resend error:", error);
-      return new Response(
-        JSON.stringify({ error: "Email failed to send" }),
-        { status: 500 }
-      );
-    }
+    console.log('🔐 Authenticating SMTP...');
 
-    return new Response(
-      JSON.stringify({ success: true }),
-      { status: 200 }
-    );
+    await transporter.verify(); // 🔴 THIS WILL TELL THE TRUTH
+
+    console.log('✅ SMTP verified');
+
+    await transporter.sendMail({
+      from: `"Portfolio Contact" <${process.env.GMAIL_USER}>`,
+      to: process.env.GMAIL_USER,
+      replyTo: email,
+      subject: `New Portfolio Message: ${subject}`,
+      html: `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+      
+      <h2 style="color: #6d28d9;">📩 New Mail from the Portfolio website</h2>
+
+      <table style="border-collapse: collapse; margin-bottom: 16px;">
+        <tr>
+          <td style="padding: 6px 12px; font-weight: bold;">From</td>
+          <td style="padding: 6px 12px;">${email}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 12px; font-weight: bold;">Subject</td>
+          <td style="padding: 6px 12px;">${subject}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 12px; font-weight: bold;">Received</td>
+          <td style="padding: 6px 12px;">${new Date().toLocaleString()}</td>
+        </tr>
+      </table>
+
+      <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
+
+      <h3 style="margin-bottom: 8px;">Message</h3>
+      <p style="white-space: pre-wrap;">
+        ${message}
+      </p>
+
+      <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;" />
+
+      <p style="font-size: 13px; color: #6b7280;">
+        Reply directly to this email to respond to <strong>${email}</strong>.
+      </p>
+    </div>
+  `,
+    });
+    console.log('✅ Mail sent successfully');
+
+    // await transporter.sendMail({
+    //   from: `"Portfolio Contact" <${process.env.GMAIL_USER}>`,
+    //   to: process.env.GMAIL_USER,
+    //   replyTo: email,
+    //   subject,
+    //   html: `<p>${message}</p>`,
+    // });
+
+    return Response.json({ success: true });
   } catch (err) {
-    console.error("Send failed:", err);
-    return new Response(
-      JSON.stringify({ error: "Server error" }),
+    console.error('❌ Mail error:', err);
+    return Response.json(
+      { error: err.message || 'Mail failed' },
       { status: 500 }
     );
   }
 }
-
-
-
-// import { Resend } from "resend";
-
-// const resend = new Resend(process.env.RESEND_API_KEY);
-
-// export async function POST(req) {
-//   try {
-//     const body = await req.json();
-//     const { email, subject, message } = body;
-
-//     if (!email || !subject || !message) {
-//       return new Response("OK", { status: 200 });
-//     }
-
-//     await resend.emails.send({
-//       from: "Portfolio Contact <onboarding@resend.dev>",
-//       to: [process.env.CONTACT_EMAIL],
-//       reply_to: email,
-//       subject,
-//       html: `
-//         <p><strong>From:</strong> ${email}</p>
-//         <p>${message.replace(/\n/g, "<br/>")}</p>
-//       `,
-//     });
-
-//     // 🔥 ALWAYS respond fast
-//     return new Response("OK", { status: 200 });
-//   } catch (err) {
-//     console.error("Send failed:", err);
-//     return new Response("OK", { status: 200 });
-//   }
-// }
-
-
-// import { Resend } from "resend";
-
-// const resend = new Resend(process.env.RESEND_API_KEY);
-
-// export async function POST(req) {
-//   try {
-//     const contentType = req.headers.get("content-type");
-
-//     let email, subject, message;
-
-//     if (contentType?.includes("multipart/form-data")) {
-//       const formData = await req.formData();
-//       email = formData.get("email");
-//       subject = formData.get("subject");
-//       message = formData.get("message");
-//     } else {
-//       const body = await req.json();
-//       email = body.email;
-//       subject = body.subject;
-//       message = body.message;
-//     }
-
-//     email = email?.replace(/\s+/g, "").toLowerCase();
-//     subject = subject?.trim();
-//     message = message?.trim();
-
-//     if (!email || !subject || !message) {
-//       return new Response(
-//         JSON.stringify({ error: "Missing fields" }),
-//         { status: 400, headers: { "Content-Type": "application/json" } }
-//       );
-//     }
-
-//     const { error } = await resend.emails.send({
-//       from: "Portfolio Contact <onboarding@resend.dev>",
-//       to: [process.env.CONTACT_EMAIL],
-//       reply_to: email,
-//       subject: `Portfolio Contact: ${subject}`,
-//       html: `
-//         <p><strong>From:</strong> ${email}</p>
-//         <p>${message.replace(/\n/g, "<br/>")}</p>
-//       `,
-//     });
-
-//     if (error) {
-//       console.error("Resend error:", error);
-//       return new Response(
-//         JSON.stringify({ error: error.message }),
-//         { status: 502, headers: { "Content-Type": "application/json" } }
-//       );
-//     }
-
-//     return new Response(
-//       JSON.stringify({ success: true }),
-//       { status: 200, headers: { "Content-Type": "application/json" } }
-//     );
-//   } catch (err) {
-//     console.error("Server crash:", err);
-//     return new Response(
-//       JSON.stringify({ error: "Server error" }),
-//       { status: 500, headers: { "Content-Type": "application/json" } }
-//     );
-//   }
-// }
-
-
-// import { Resend } from "resend";
-
-// const resend = new Resend(process.env.RESEND_API_KEY);
-
-// export async function POST(req) {
-//   try {
-//     const body = await req.json();
-
-//     let { email, subject, message } = body;
-
-//     email = email?.replace(/\s+/g, "").toLowerCase();
-//     subject = subject?.trim();
-//     message = message?.trim();
-
-//     if (!email || !subject || !message) {
-//       return new Response(
-//         JSON.stringify({ error: "Missing fields" }),
-//         { status: 400, headers: { "Content-Type": "application/json" } }
-//       );
-//     }
-
-//     const result = await resend.emails.send({
-//       from: "Portfolio Contact <onboarding@resend.dev>",
-//       to: [process.env.CONTACT_EMAIL],
-//       reply_to: email,
-//       subject,
-//       html: `
-//         <p><strong>From:</strong> ${email}</p>
-//         <p>${message.replace(/\n/g, "<br/>")}</p>
-//       `,
-//     });
-
-//     if (result.error) {
-//       console.error("Resend error:", result.error);
-
-//       return new Response(
-//         JSON.stringify({
-//           error: result.error.message || "Email service failed",
-//         }),
-//         { status: 502, headers: { "Content-Type": "application/json" } }
-//       );
-//     }
-
-//     return new Response(
-//       JSON.stringify({ success: true }),
-//       { status: 200, headers: { "Content-Type": "application/json" } }
-//     );
-//   } catch (err) {
-//     console.error("API crash:", err);
-
-//     return new Response(
-//       JSON.stringify({ error: "Server error" }),
-//       { status: 500, headers: { "Content-Type": "application/json" } }
-//     );
-//   }
-// }
-
-
-// import { Resend } from 'resend';
-
-// const resend = new Resend(process.env.RESEND_API_KEY);
-
-// export async function POST(req) {
-//   try {
-//     let body;
-//     try {
-//       body = await req.json();
-//     } catch (err) {
-//       console.error('Invalid JSON from client');
-//       return new Response(JSON.stringify({ error: 'Invalid JSON payload' }), {
-//         status: 400,
-//       });
-//     }
-
-//     if (!body) {
-//       return new Response(JSON.stringify({ error: 'Invalid request body' }), {
-//         status: 400,
-//         headers: { 'Content-Type': 'application/json' },
-//       });
-//     }
-
-//     let { email, subject, message } = body;
-
-//     email = email?.trim().toLowerCase();
-//     subject = subject?.trim();
-//     message = message?.trim();
-
-//     if (!email || !subject || !message) {
-//       return new Response(JSON.stringify({ error: 'Missing fields' }), {
-//         status: 400,
-//         headers: { 'Content-Type': 'application/json' },
-//       });
-//     }
-
-//     const { error } = await resend.emails.send({
-//       from: 'Portfolio Contact <onboarding@resend.dev>',
-//       to: [process.env.CONTACT_EMAIL],
-//       reply_to: email,
-//       subject: `Portfolio Contact: ${subject}`,
-//       html: `
-//     <p><strong>From:</strong> ${email}</p>
-//     <p>${message.replace(/\n/g, '<br/>')}</p>
-//   `,
-//     });
-
-//     // const { error } = await resend.emails.send({
-//     //   from: 'Portfolio Contact <onboarding@resend.dev>',
-//     //   to: [process.env.CONTACT_EMAIL],
-//     //   // reply_to: {
-//     //   //   email,
-//     //   // },
-//     //   subject,
-//     //   html: `
-//     //     <h2>New Message from Portfolio Website</h2>
-//     //     <p><strong>From:</strong> ${email}</p>
-//     //     <p><strong>Message:</strong></p>
-//     //     <p>${message.replace(/\n/g, '<br/>')}</p>
-//     //   `,
-//     // });
-
-//     if (error) {
-//       console.error('Resend error:', error);
-//       return new Response(JSON.stringify({ error: 'Email service failed' }), {
-//         status: 502,
-//         headers: { 'Content-Type': 'application/json' },
-//       });
-//     }
-
-//     return new Response(JSON.stringify({ success: true }), {
-//       status: 200,
-//       headers: { 'Content-Type': 'application/json' },
-//     });
-//   } catch (error) {
-//     console.error('Server error:', error);
-//     return new Response(JSON.stringify({ error: 'Failed to send email' }), {
-//       status: 500,
-//       headers: { 'Content-Type': 'application/json' },
-//     });
-//   }
-// }
 
 // import { Resend } from "resend";
 // const resend = new Resend(process.env.RESEND_API_KEY);
