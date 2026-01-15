@@ -1,20 +1,37 @@
 import { Resend } from "resend";
 
+export const runtime = "nodejs"; // 🔴 REQUIRED for Resend
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req) {
   try {
-    const body = await req.json();
-    const { email, subject, message } = body;
+    const body = await req.json().catch(() => null);
 
-    if (!email || !subject || !message) {
-      return new Response("OK", { status: 200 });
+    if (!body) {
+      return new Response(
+        JSON.stringify({ error: "Invalid JSON body" }),
+        { status: 400 }
+      );
     }
 
-    await resend.emails.send({
+    let { email, subject, message } = body;
+
+    email = email?.trim().toLowerCase();
+    subject = subject?.trim();
+    message = message?.trim();
+
+    if (!email || !subject || !message) {
+      return new Response(
+        JSON.stringify({ error: "Missing fields" }),
+        { status: 400 }
+      );
+    }
+
+    const { error } = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
       to: [process.env.CONTACT_EMAIL],
-      reply_to: email,
+      replyTo: email, // ✅ correct key
       subject,
       html: `
         <p><strong>From:</strong> ${email}</p>
@@ -22,13 +39,60 @@ export async function POST(req) {
       `,
     });
 
-    // 🔥 ALWAYS respond fast
-    return new Response("OK", { status: 200 });
+    if (error) {
+      console.error("Resend error:", error);
+      return new Response(
+        JSON.stringify({ error: "Email failed to send" }),
+        { status: 500 }
+      );
+    }
+
+    return new Response(
+      JSON.stringify({ success: true }),
+      { status: 200 }
+    );
   } catch (err) {
     console.error("Send failed:", err);
-    return new Response("OK", { status: 200 });
+    return new Response(
+      JSON.stringify({ error: "Server error" }),
+      { status: 500 }
+    );
   }
 }
+
+
+
+// import { Resend } from "resend";
+
+// const resend = new Resend(process.env.RESEND_API_KEY);
+
+// export async function POST(req) {
+//   try {
+//     const body = await req.json();
+//     const { email, subject, message } = body;
+
+//     if (!email || !subject || !message) {
+//       return new Response("OK", { status: 200 });
+//     }
+
+//     await resend.emails.send({
+//       from: "Portfolio Contact <onboarding@resend.dev>",
+//       to: [process.env.CONTACT_EMAIL],
+//       reply_to: email,
+//       subject,
+//       html: `
+//         <p><strong>From:</strong> ${email}</p>
+//         <p>${message.replace(/\n/g, "<br/>")}</p>
+//       `,
+//     });
+
+//     // 🔥 ALWAYS respond fast
+//     return new Response("OK", { status: 200 });
+//   } catch (err) {
+//     console.error("Send failed:", err);
+//     return new Response("OK", { status: 200 });
+//   }
+// }
 
 
 // import { Resend } from "resend";
