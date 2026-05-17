@@ -130,7 +130,7 @@ const EmailSection = () => {
               backgroundClip: "text",
             }}
           >
-            Let's Build Something Great
+            {"Let's Build Something Great"}
           </h2>
 
           <p className="mb-6 text-[#8892a4] leading-relaxed max-w-md">
